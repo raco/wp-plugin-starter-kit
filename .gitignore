@@ -1,0 +1,12 @@
+# Clean Up
+
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+# NPM and Bower
+
+app/bower_components
+bower_components/
+node_modules/
