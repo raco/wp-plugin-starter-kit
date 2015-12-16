@@ -8,7 +8,7 @@ Super-easy WordPress plugin boilerplate for your next project.
 ### Installation
 ```
 cd wp-content/plugins
-git clone https://github.com/maxkostinevich/wpplugin-starter-kit.git your-plugin-name-starter-kit
+git clone https://github.com/maxkostinevich/wp-plugin-starter-kit.git your-plugin-name-starter-kit
 cd your-plugin-name-starter-kit
 npm install --only=dev
 ```
