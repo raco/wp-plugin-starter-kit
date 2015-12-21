@@ -13,9 +13,9 @@ cd your-plugin-name
 npm install --only=dev
 ```
 
-**IMPORTANT: STEPS BEFORE PROCEED**
-1. Change Application Name and Author in **package.json**
-2. Edit pluginConfig var in **gulpfile.js**: change plugin name, plugin slug, authour, etc.
+**IMPORTANT STEPS BEFORE PROCEED**
+- 1. Change Application Name and Author in **package.json**
+- 2. Edit pluginConfig var in **gulpfile.js**: change plugin name, plugin slug, authour, etc.
 
 ### Scaffold your project
 ```
