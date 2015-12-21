@@ -1,6 +1,6 @@
 <?php
 /**
- * Represents the view for the administration dashboard.
+ * Represents the view for the plugin settings page.
  *
  * This includes the header, options, and other information that should provide
  * The User Interface to the end user.
@@ -8,7 +8,7 @@
  * @package   Plugin_Name_Admin
  * @author    CONF_Plugin_Author
  * @license   GPL-2.0+
- * @link      CONF_Plugin_Author_Link
+ * @link      CONF_Author_Link
  * @copyright CONF_Plugin_Copyright
  */
 ?>

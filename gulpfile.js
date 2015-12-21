@@ -12,7 +12,7 @@ var pluginConfig = {
 						'CONF Plugin Name': 'WP Starter Plugin', // User friendly plugin name
 						'CONF_Plugin_Link': 'http://github.com/maxkostinevich/wp-plugin-starer-kit',
 						'CONF_Plugin_Author': 'Max Kostinevich',
-						'CONF_Plugin_Author_Link': 'http://maxkostinevich.com',
+						'CONF_Author_Link': 'http://maxkostinevich.com',
 						'CONF_Plugin_Copyright': '2015 Max Kostinevich',
 
 						'plugin-name': 'wp-starter-plugin', // Plugin slug
@@ -24,11 +24,35 @@ var pluginConfig = {
 
 var	mainFiles 	= [
 						// include common file types
-						'./app/**/*'
+						'./**/*',
+						'!gulpfile.js',
+						'!package.json',
+						'!README.md',
+						'!.gitignore',
+						'!build',
+						'!build/**',
+						'!.git',
+						'!.git/**',
+						'!node_modules',
+						'!node_modules/**',
+			//			'!bower_components'
+			//			'!bower_components/**'
 				];
 
 var	buildInclude 	= [
-						'app/**'
+						'**',
+						'!gulpfile.js',
+						'!package.json',
+						'!README.md',
+						'!.gitignore',
+						'!build',
+						'!build/**',
+						'!.git',
+						'!.git/**',
+						'!node_modules',
+						'!node_modules/**',
+				//		'!bower_components'
+				//		'!bower_components/**'
 					];
 
 
@@ -76,13 +100,13 @@ gulp.task('bootstrap:renameOriginals', function () {
 			.pipe(replace('CONF Plugin Name', pluginConfig['CONF Plugin Name']))
 			.pipe(replace('CONF_Plugin_Link', pluginConfig['CONF_Plugin_Link']))
 			.pipe(replace('CONF_Plugin_Author', pluginConfig['CONF_Plugin_Author']))
-			.pipe(replace('CONF_Plugin_Author_Link', pluginConfig['CONF_Plugin_Author_Link']))
+			.pipe(replace('CONF_Author_Link', pluginConfig['CONF_Author_Link']))
 			.pipe(replace('CONF_Plugin_Copyright', pluginConfig['CONF_Plugin_Copyright']))
 			.pipe(replace('plugin-name', pluginConfig['plugin-name']))
 			.pipe(replace('Plugin_Name', pluginConfig['Plugin_Name']))
 			.pipe(replace('plugin_name', pluginConfig['plugin_name']))
 			.pipe(regex_rename(/plugin-name/, pluginConfig['plugin-name']))
-			.pipe(gulp.dest('./app'))
+			.pipe(gulp.dest('./'))
 			.pipe(notify({ message: 'Plugin has been successfully bootstrapped', onLast: true }));
 });
 
@@ -93,7 +117,7 @@ gulp.task('bootstrap:deleteOriginals', function () {
 					reg: /plugin-name/,
 					deleteMatch: true
 			}))
-			.pipe(gulp.dest('./app'));
+			.pipe(gulp.dest('./'));
 });
 
 
@@ -120,13 +144,13 @@ gulp.task('build:plugin', function () {
 	return gulp.src(mainFiles)
 			.pipe(gulpif('*.js', uglify()))
 			.pipe(gulpif('*.css', minifyCss()))
-			.pipe(gulp.dest('../'+ pluginConfig['plugin-name']))
+			.pipe(gulp.dest('build/'+ pluginConfig['plugin-name']))
 			.pipe(notify({ message: 'Build task has been finished', onLast: true }));
 });
 
 //
 gulp.task('build:archive', function () {
- 	return gulp.src('../'+ pluginConfig['plugin-name'] +'/**/',{ base : "../" })
+ 	return gulp.src('build/'+ pluginConfig['plugin-name'] +'/**/',{ base : "./build" })
 			.pipe(zip(pluginConfig['plugin-name'] + '.zip'))
 			.pipe(gulp.dest('./build'))
 			.pipe(notify({ message: 'Plugin has been archived successfully', onLast: true }));

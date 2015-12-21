@@ -51,7 +51,7 @@
             return {
                     longname : 'CONF Plugin Name',
                     author : 'CONF_Plugin_Author',
-                    authorurl : 'CONF_Plugin_Author_Link',
+                    authorurl : 'CONF_Author_Link',
                     infourl : 'http://wiki.moxiecode.com/',
                     version : "1.0.0"
             };

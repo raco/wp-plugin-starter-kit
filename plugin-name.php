@@ -3,7 +3,7 @@
  * @package   Plugin_Name
  * @author    CONF_Plugin_Author
  * @license   GPL-2.0+
- * @link      CONF_Plugin_Author_Link
+ * @link      CONF_Author_Link
  * @copyright CONF_Plugin_Copyright
  *
  * @wordpress-plugin
@@ -12,7 +12,7 @@
  * Description:       Plugin Description
  * Version:           1.0.0
  * Author:            CONF_Plugin_Author
- * Author URI:        CONF_Plugin_Author_Link
+ * Author URI:        CONF_Author_Link
  * Text Domain:       plugin-name
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt

@@ -5,7 +5,7 @@
  * @package   Plugin_Name_Shortcode_Public
  * @author    CONF_Plugin_Author
  * @license   GPL-2.0+
- * @link      CONF_Plugin_Author_Link
+ * @link      CONF_Author_Link
  * @copyright CONF_Plugin_Copyright
  */
 
