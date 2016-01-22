@@ -19,6 +19,15 @@
 class Plugin_Name_Public {
 
 	/**
+	 * Plugin version name
+	 *
+	 * @since   1.0.0
+	 *
+	 * @var     string
+	 */
+	private static $version_name = 'plugin_name_version';
+
+	/**
 	 * Plugin version, used for cache-busting of style and script file references.
 	 *
 	 * @since   1.0.0
@@ -77,6 +86,17 @@ class Plugin_Name_Public {
 	 */
 	public function get_plugin_slug() {
 		return $this->plugin_slug;
+	}
+
+	/**
+	 * Return the plugin version.
+	 *
+	 * @since    1.0.0
+	 *
+	 * @return    Plugin version variable.
+	 */
+	public function get_plugin_version() {
+		return self::VERSION;
 	}
 
 	/**
@@ -219,6 +239,7 @@ class Plugin_Name_Public {
 	 * @since    1.0.0
 	 */
 	private static function single_activate() {
+		update_option( self::$version_name, self::VERSION );
 		// @TODO: Define activation functionality here
 	}
 

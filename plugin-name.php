@@ -24,28 +24,58 @@ if ( ! defined( 'WPINC' ) ) {
 	die();
 }
 
+/*----------------------------------------------------------------------------*
+ * * * ATTENTION! * * *
+ * FOR DEVELOPMENT ONLY
+ * SHOULD BE DISABLED ON PRODUCTION
+ *----------------------------------------------------------------------------*/
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+/*----------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------*
+ * Plugin Settings
+ *----------------------------------------------------------------------------*/
+
+/* ----- Plugin Module: Settings ----- */
+ require_once( plugin_dir_path( __FILE__ ) . 'includes/class-plugin-name-settings.php' );
+
+ register_activation_hook( __FILE__, array( 'Plugin_Name_Settings', 'activate' ) );
+ add_action( 'plugins_loaded', array( 'Plugin_Name_Settings', 'get_instance' ) );
+/* ----- Module End: Settings ----- */
+
 
 /*----------------------------------------------------------------------------*
  * Include extensions and CPT
  *----------------------------------------------------------------------------*/
 
+/* ----- Plugin Module: CPT ----- */
 // require_once( plugin_dir_path( __FILE__ ) . 'includes/cpt/class-plugin-name-cpt.php' );
+//  add_action( 'plugins_loaded', array( 'Plugin_Name_CPT', 'get_instance' ) );
+/* ----- Module End: CPT ----- */
+
 
 /*----------------------------------------------------------------------------*
  * Custom DB Tables
  *----------------------------------------------------------------------------*/
 
+/* ----- Plugin Module: Database ----- */
 // require_once( plugin_dir_path( __FILE__ ) . 'includes/class-plugin-name-db.php' );
 
 // register_activation_hook( __FILE__, array( 'Plugin_Name_DB', 'activate' ) );
 // add_action( 'plugins_loaded', array( 'Plugin_Name_DB', 'db_check' ) );
+ /* ----- Module End: Database ----- */
+
 
 /*----------------------------------------------------------------------------*
  * Handle AJAX Calls
  *----------------------------------------------------------------------------*/
 
+/* ----- Plugin Module: AJAX ----- */
 // require_once( plugin_dir_path( __FILE__ ) . 'includes/class-plugin-name-ajax.php' );
 // add_action( 'plugins_loaded', array( 'Plugin_Name_AJAX', 'get_instance' ) );
+/* ----- Module End: AJAX ----- */
+
 
 /*----------------------------------------------------------------------------*
  * Public-Facing Functionality
@@ -78,7 +108,9 @@ add_action( 'plugins_loaded', array( 'Plugin_Name_Public', 'get_instance' ) );
  */
 if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
 
-	// require_once( plugin_dir_path( __FILE__ ) . 'admin/includes/class-plugin-name-list.php' );
+/* ----- Plugin Module: CRUD ----- */
+//	 require_once( plugin_dir_path( __FILE__ ) . 'admin/includes/class-plugin-name-list.php' );
+/* ----- Module End: CRUD ----- */
 
 	require_once( plugin_dir_path( __FILE__ ) . 'admin/class-plugin-name-admin.php' );
 	add_action( 'plugins_loaded', array( 'Plugin_Name_Admin', 'get_instance' ) );
@@ -90,6 +122,7 @@ if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
  * Register Plugin Shortcode
  *----------------------------------------------------------------------------*/
 
+/* ----- Plugin Module: Shortcode ----- */
 // Admin Side
 // require_once( plugin_dir_path( __FILE__ ) . 'includes/shortcode/class-plugin-name-shortcode-admin.php' );
 // add_action( 'plugins_loaded', array( 'Plugin_Name_Shortcode_Admin', 'get_instance' ) );
@@ -97,3 +130,4 @@ if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
 // Public Side
 // require_once( plugin_dir_path( __FILE__ ) . 'includes/shortcode/class-plugin-name-shortcode-public.php' );
 // add_action( 'plugins_loaded', array( 'Plugin_Name_Shortcode_Public', 'get_instance' ) );
+ /* ----- Module End: Shortcode ----- */

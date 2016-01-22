@@ -41,7 +41,7 @@ class Plugin_Name_CPT {
 	 */
 	private function __construct() {
 		self::load_cpt();
-		self::register_cpt_and_taxonomies();
+		add_action( 'init', array( $this, 'register_cpt_and_taxonomies') );
 	}
 
 	/**
@@ -69,7 +69,7 @@ class Plugin_Name_CPT {
 	 *
 	 * @since     1.0.0
 	 */
-	private function load_cpt() {
+	private static function load_cpt() {
 		$cpt = array(
 			'entries' => array(
 						'labels' => array(
@@ -116,7 +116,7 @@ class Plugin_Name_CPT {
 	 *
 	 * @since     1.0.0
 	 */
-	private function register_cpt_and_taxonomies(){
+	public function register_cpt_and_taxonomies(){
 		// Register CPT
 		foreach( self::$cpt_list as $slug => $args ){
 			register_post_type( $slug , $args );

@@ -1,6 +1,26 @@
-# WordPress Plugin Starter Kit
+# WordPress Plugin Starter Kit (Boilerplate)
 
-Super-easy WordPress plugin boilerplate for your next project.
+Super-easy WordPress plugin boilerplate which you can use to develop your own plugin for WordPress.
+
+**Features:**
+- Easy to get started
+- Clean and well-commented object-oriented code
+- Developed using best WordPress practices
+- Modern workflow with npm and gulp
+- Useful modules are included
+
+**Included Modules:**
+- Custom Database Tables with CRUD (Create, Read, Update, Delete) feature
+- Custom Taxonomies and Custom Post Types
+- AJAX
+- Shortcode (with TinyMCE plugin)
+- Plugin Settings (Settings page with tabs is included)
+
+**Coming soon:**
+- Frontend Widgets
+- Admin Dashboard Widgets
+- Custom Metaboxes
+- Guides and How-to Manuals
 
 
 ## Usage
@@ -15,11 +35,11 @@ npm install --only=dev
 
 **IMPORTANT STEPS BEFORE PROCEED**
 - 1. Change Application Name and Author in **package.json**
-- 2. Edit pluginConfig var in **gulpfile.js**: change plugin name, plugin slug, authour, etc.
+- 2. Edit pluginConfig var in **gulpfile.js**: change plugin name, plugin slug, author, etc.
 
 ### Scaffold your project
 ```
-// this command will replace plugin variables and rename plugin files according values defined in pluginConfig (see gulpfile.js)
+// this command will replace plugin variables and rename plugin files according to values defined in the pluginConfig (see gulpfile.js)
 
 gulp bootstrap
 ```
@@ -35,12 +55,30 @@ gulp build // build project and create ZIP archive
 ## Changelog
 
 ```
+v2.1.0 - Jan 22, 2016
+** NEW **
+    - Settings Page has been added
+    - Example of plugin settings
+    - Example of settings page with tabs
+    - PHP Error reporting has been added
+
+** Updates **
+    - Plugin version is now stored in the database
+    - Code formatting and comments
+    - All plugin modules are marked with comments ** Plugin Module: <MODULE NAME> ** and ** Module End: <MODULE NAME> **
+
+** Fixes **
+    - Issue with Plugin_Name_CPT class
+    - Issue with calling non-static method in Plugin_Name_DB class
+```
+
+```
 v2.0.0 - Dec 21, 2015
-** Workflow changed **
+** Deployment workflow has been changed **
     - All plugin files are moved from /app/ folder to the root folder
     - Build task has been updated
 
-** Fixed **
+** Fixes **
     - Issue with Plugin Author URL
 ```
 
@@ -50,4 +88,4 @@ v1.0.0 - Dec 16, 2015
 ```
 
 ## [CC BY 4.0 License](http://creativecommons.org/licenses/by/4.0/)
-2015 (c) [Max Kostinevich](https://maxkostinevich.com) - All rights reserved.
+(c) 2015 - 2016 [Max Kostinevich](https://maxkostinevich.com) - All rights reserved.

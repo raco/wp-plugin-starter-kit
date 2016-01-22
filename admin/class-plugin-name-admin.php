@@ -58,6 +58,7 @@ class Plugin_Name_Admin {
 		 */
 		$plugin = Plugin_Name_Public::get_instance();
 		$this->plugin_slug = $plugin->get_plugin_slug();
+		$this->plugin_version = $plugin->get_plugin_version();
 
 		// Load admin style sheet and JavaScript.
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_css_js' ) );
@@ -115,20 +116,37 @@ class Plugin_Name_Admin {
 
 		$screen = get_current_screen();
 
-		if ( ( ( $this->plugin_screen_hook_suffix['plugin_name'] == $screen->id ) ) || ( $this->plugin_screen_hook_suffix['settings'] == $screen->id ) ) {
+		/* ----- Plugin Module: Settings ----- */
+		// Settings Page
+		if ( $this->plugin_screen_hook_suffix['settings'] == $screen->id ) {
 			/* Admin Styles */
-			wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array(), Plugin_Name_Public::VERSION );
+			wp_enqueue_style( $this->plugin_slug .'-plugin-settings-styles', plugins_url( 'assets/css/settings.css', __FILE__ ), array(), 	$this->plugin_version );
 
 			// Main Admin JS Script
-			wp_register_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery', $this->plugin_slug . '-admin-app' ), Plugin_Name_Public::VERSION );
+			wp_register_script( $this->plugin_slug . '-settings-script', plugins_url( 'assets/js/settings.js', __FILE__ ), array( 'jquery' ), 	$this->plugin_version );
+			wp_enqueue_script( $this->plugin_slug . '-settings-script' );
+		}
+		/* ----- End Module: Settings ----- */
+
+
+		// Main Plugin Page
+		if ( $this->plugin_screen_hook_suffix['plugin_name'] == $screen->id ) {
+			/* Admin Styles */
+			wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array(), $this->plugin_version );
+
+			// Main Admin JS Script
+			wp_register_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery', $this->plugin_slug . '-admin-app' ), $this->plugin_version );
 			wp_enqueue_script( $this->plugin_slug . '-admin-script' );
 
 		}
 
+
+		/* ----- Plugin Module: CRUD ----- */
 		/* if ( ( ( $this->plugin_screen_hook_suffix['entries_view'] == $screen->id ) && ( $_GET['action'] == 'edit' ) ) || ( $this->plugin_screen_hook_suffix['entry_add'] == $screen->id ) ) {
 			// include scripts and styles for pages: "Entry Edit" and "Entries View"
 		}
 		*/
+		/* ----- End Module: CRUD ----- */
 
 	}
 
@@ -158,7 +176,7 @@ class Plugin_Name_Admin {
 			'dashicons-layout'
 		);
 
-
+		/* ----- Plugin Module: CRUD ----- */
 // Example of custom pages (Entries View and Edit)
 /*
 		$this->plugin_screen_hook_suffix['entries_view'] = add_object_page(
@@ -180,20 +198,23 @@ class Plugin_Name_Admin {
 			array( $this, 'display_plugin_page_entry_edit' )
 		);
 */
+		/* ----- End Module: CRUD ----- */
 
-
+		/* ----- Plugin Module: Settings ----- */
 		$this->plugin_screen_hook_suffix['settings'] = add_submenu_page(
 			$this->plugin_slug . '-main-page',
 			__( 'Settings', 'plugin-name' ),
 			__( 'Settings', 'plugin-name' ),
 			'manage_options',
 			$this->plugin_slug . '-settings',
-			array( $this, 'display_plugin_page_main' )
+			array( $this, 'display_plugin_page_settings' )
 		);
+		/* ----- End Module: Settings ----- */
 
 
 	}
 
+	/* ----- Plugin Module: CRUD ----- */
 	/**
 	 * Render "Manage Entries" page
 	 *
@@ -201,8 +222,8 @@ class Plugin_Name_Admin {
 	 */
 /*
 	public function display_plugin_page_entries_view() {
-		if( $_GET['action'] == 'edit' ){
-			include_once( 'views/entry-edit.php' );
+		if( isset( $_GET['action'] ) && ( $_GET['action'] == 'edit' ) ){
+			$this->display_plugin_page_entry_edit();
 		}else{
 			$plugin_name_list_table = new Plugin_Name_List();
 			$plugin_name_list_table->prepare_items();
@@ -220,13 +241,23 @@ class Plugin_Name_Admin {
 	 */
 /*
 	public function display_plugin_page_entry_edit() {
+		global $wpdb;
+
+		if( isset( $_GET['id'] ) && $_GET['id'] != 0 ){
+			$entry_data = $wpdb->get_row( 'SELECT * FROM ' . Plugin_Name_DB::get_table_name() . ' WHERE id = ' . $_GET['id'] );
+			// get data
+			$entry_id					= $track_data->id;
+			$entry_title			= $track_data->entry_title;
+			// and so on
+		}
 		include_once( 'views/entry-edit.php' );
 	}
 */
+	/* ----- End Module: CRUD ----- */
 
 
 	/**
-	 * Render the settings page for this plugin.
+	 * Render the main page for this plugin.
 	 *
 	 * @since    1.0.0
 	 */
@@ -235,6 +266,7 @@ class Plugin_Name_Admin {
 	}
 
 
+	/* ----- Plugin Module: Settings ----- */
 	/**
 	 * Render the settings page for this plugin.
 	 *
@@ -243,6 +275,8 @@ class Plugin_Name_Admin {
 	public function display_plugin_page_settings() {
 		include_once( 'views/settings.php' );
 	}
+	/* ----- End Module: Settings ----- */
+
 	/**
 	 * Add settings action link to the plugins page.
 	 *

@@ -2,7 +2,7 @@
 /**
  * CONF Plugin Name.
  *
- * @package   Plugin_Name_AJAX
+ * @package   Plugin_Name_DB
  * @author    CONF_Plugin_Author
  * @license   GPL-2.0+
  * @link      CONF_Author_Link
@@ -124,7 +124,7 @@ class Plugin_Name_DB {
 	 *
 	 * @since     1.0.0
 	 */
-	private function db_setup() {
+	private static function db_setup() {
 		if (get_site_option( self::$db_option_name ) != self::$db_version) {
 
 			global $wpdb;
@@ -152,7 +152,7 @@ class Plugin_Name_DB {
 	 *
 	 * @since     1.0.0
 	 */
-	public function db_check() {
+	public static function db_check() {
 
 		if (get_site_option( self::$db_option_name ) != self::$db_version) {
 			self::db_setup();
@@ -160,7 +160,7 @@ class Plugin_Name_DB {
 
 	}
 
-	public function get_table_name() {
+	public static function get_table_name() {
 			global $wpdb;
 			return $wpdb->prefix . self::$db_table_name;
 	}

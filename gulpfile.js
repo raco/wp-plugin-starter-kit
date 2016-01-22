@@ -13,7 +13,7 @@ var pluginConfig = {
 						'CONF_Plugin_Link': 'http://github.com/maxkostinevich/wp-plugin-starer-kit',
 						'CONF_Plugin_Author': 'Max Kostinevich',
 						'CONF_Author_Link': 'http://maxkostinevich.com',
-						'CONF_Plugin_Copyright': '2015 Max Kostinevich',
+						'CONF_Plugin_Copyright': '2016 Max Kostinevich',
 
 						'plugin-name': 'wp-starter-plugin', // Plugin slug
 						'Plugin_Name': 'WP_Starter_Plugin', // Classes prefix
