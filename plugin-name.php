@@ -68,16 +68,6 @@ ini_set('display_errors', 1);
 
 
 /*----------------------------------------------------------------------------*
- * Handle AJAX Calls
- *----------------------------------------------------------------------------*/
-
-/* ----- Plugin Module: AJAX ----- */
-// require_once( plugin_dir_path( __FILE__ ) . 'includes/class-plugin-name-ajax.php' );
-// add_action( 'plugins_loaded', array( 'Plugin_Name_AJAX', 'get_instance' ) );
-/* ----- Module End: AJAX ----- */
-
-
-/*----------------------------------------------------------------------------*
  * Public-Facing Functionality
  *----------------------------------------------------------------------------*/
 
@@ -131,3 +121,13 @@ if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
 // require_once( plugin_dir_path( __FILE__ ) . 'includes/shortcode/class-plugin-name-shortcode-public.php' );
 // add_action( 'plugins_loaded', array( 'Plugin_Name_Shortcode_Public', 'get_instance' ) );
  /* ----- Module End: Shortcode ----- */
+ 
+ 
+ /*----------------------------------------------------------------------------*
+ * Handle AJAX Calls
+ *----------------------------------------------------------------------------*/
+
+/* ----- Plugin Module: AJAX ----- */
+// require_once( plugin_dir_path( __FILE__ ) . 'includes/class-plugin-name-ajax.php' );
+// add_action( 'plugins_loaded', array( 'Plugin_Name_AJAX', 'get_instance' ) );
+/* ----- Module End: AJAX ----- */
