@@ -32,7 +32,7 @@ class Plugin_Name_AJAX {
 	private function __construct() {
 
 		// Backend AJAX calls
-		if ( is_admin() ) {
+		if ( current_user_can( 'manage_options' ) ) {
 			add_action( 'wp_ajax_admin_backend_call', array( $this, 'ajax_backend_call' ) );
 		}
 
