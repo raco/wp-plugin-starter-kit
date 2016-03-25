@@ -87,5 +87,5 @@ v1.0.0 - Dec 16, 2015
 ** Initial commit **
 ```
 
-## [CC BY 4.0 License](http://creativecommons.org/licenses/by/4.0/)
+## [GPL-2.0+ License](http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 (c) 2015 - 2016 [Max Kostinevich](https://maxkostinevich.com) - All rights reserved.
