@@ -10,10 +10,10 @@
 
 var pluginConfig = {
 						'CONF Plugin Name': 'WP Starter Plugin', // User friendly plugin name
-						'CONF_Plugin_Link': 'http://github.com/maxkostinevich/wp-plugin-starer-kit',
-						'CONF_Plugin_Author': 'Max Kostinevich',
-						'CONF_Author_Link': 'http://maxkostinevich.com',
-						'CONF_Plugin_Copyright': '2016 Max Kostinevich',
+						'CONF_Plugin_Link': 'http://github.com/maxkostinevich/wp-plugin-starer-kit', // Plugin homepage URL
+						'CONF_Plugin_Author': 'Max Kostinevich', // Use your own name or your company name
+						'CONF_Author_Link': 'http://maxkostinevich.com', // Use your own website
+						'CONF_Plugin_Copyright': '2016 Max Kostinevich', // Use your own name or your company name
 
 						'plugin-name': 'wp-starter-plugin', // Plugin slug
 						'Plugin_Name': 'WP_Starter_Plugin', // Classes prefix

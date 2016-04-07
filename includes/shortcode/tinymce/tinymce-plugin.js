@@ -14,8 +14,8 @@
 
             ed.addCommand('plugin_name_cmd', function() {
                 tb_show( 'Insert Shortcode', 'admin-ajax.php?action=admin_shortcode_popup&nonce='+plugin_name_tinymce.ajax_nonce );
-								//add class to thickbox for style scrollbars
-								jQuery("#TB_window").addClass("tinymce-plugin-form");
+                //add class to thickbox for style scrollbars
+                jQuery("#TB_window").addClass("tinymce-plugin-form");
 
             });
 
@@ -49,11 +49,11 @@
          */
         getInfo : function() {
             return {
-                    longname : 'CONF Plugin Name',
-                    author : 'CONF_Plugin_Author',
-                    authorurl : 'CONF_Author_Link',
-                    infourl : 'http://wiki.moxiecode.com/',
-                    version : "1.0.0"
+                longname : 'CONF Plugin Name',
+                author : 'CONF_Plugin_Author',
+                authorurl : 'CONF_Author_Link',
+                infourl : 'http://wiki.moxiecode.com/',
+                version : "1.0.0"
             };
         }
     });

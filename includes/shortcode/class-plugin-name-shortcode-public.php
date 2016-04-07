@@ -10,74 +10,85 @@
  */
 
 /**
+ *-----------------------------------------
+ * Do not delete this line
+ * Added for security reasons: http://codex.wordpress.org/Theme_Development#Template_Files
+ *-----------------------------------------
+ */
+defined('ABSPATH') or die("Direct access to the script does not allowed");
+/*-----------------------------------------*/
+
+
+/**
  * Handle Plugin Shortcode Public Side Features
  */
 class Plugin_Name_Shortcode_Public {
 
-	/**
+    /**
 	 * Instance of this class.
 	 *
 	 * @since    1.0.0
 	 *
 	 * @var      object
 	 */
-	protected static $instance = null;
+    protected static $instance = null;
 
 
 
 
-	/**
+    /**
 	 * Initialize the class
 	 *
 	 * @since     1.0.0
 	 */
-	private function __construct() {
-    /*
-     * Call $plugin_slug from public plugin class.
-     */
-    $plugin = Plugin_Name_Public::get_instance();
-    $this->plugin_slug = $plugin->get_plugin_slug();
-	}
+    private function __construct() {
+        /**
+         * Call $plugin_slug from public plugin class.
+         */
+        $plugin = Plugin_Name::get_instance();
+        $this->plugin_slug = $plugin->get_plugin_slug();
+        $this->plugin_version = $plugin->get_plugin_version();
+    }
 
-	/**
+    /**
 	 * Return an instance of this class.
 	 *
 	 * @since     1.0.0
 	 *
 	 * @return    object    A single instance of this class.
 	 */
-	public static function get_instance() {
+    public static function get_instance() {
 
-		// If the single instance hasn't been set, set it now.
-		if ( null == self::$instance ) {
-			self::$instance = new self;
-		}
+        // If the single instance hasn't been set, set it now.
+        if ( null == self::$instance ) {
+            self::$instance = new self;
+        }
 
-		return self::$instance;
-	}
+        return self::$instance;
+    }
 
 
-	/**
+    /**
 	 * Render Shortcode [plugin_shorcode]
 	 *
 	 * @since     1.0.0
 	 */
-  public function render_sc( $atts, $content = "" ){
-		extract(shortcode_atts(array(
-			'id' => ''
-		), $atts));
+    public function render_sc( $atts, $content = "" ){
+        extract(shortcode_atts(array(
+            'id' => ''
+        ), $atts));
 
-    $id=(int)$id;
+        $id=(int)$id;
 
-    if( !$id ){
-      return '';
+        if( !$id ){
+            return '';
+        }
+
+        $contentValue = $content ? $content : __('CONF Plugin Name Shorcode', 'plugin-name');
+
+        return '<span data-some-attr-id="' . $id . '" style="cursor:pointer;">' . $contentValue . '</span>';
+
     }
-
-		$contentValue = $content ? $content : __('CONF Plugin Name Shorcode', 'plugin-name');
-
-		return '<span data-some-attr-id="' . $id . '" style="cursor:pointer;">' . $contentValue . '</span>';
-
-  }
 
 
 }

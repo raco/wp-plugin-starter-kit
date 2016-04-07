@@ -11,15 +11,15 @@
 
 // If uninstall not called from WordPress, then exit
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
-	exit;
+    exit;
 }
 
 global $wpdb;
 
 if ( is_multisite() ) {
 
-	$blogs = $wpdb->get_results( "SELECT blog_id FROM {$wpdb->blogs}", ARRAY_A );
-		/* @TODO: delete all transient, options and files you may have added
+    $blogs = $wpdb->get_results( "SELECT blog_id FROM {$wpdb->blogs}", ARRAY_A );
+    /* @TODO: delete all transient, options and files you may have added
 		delete_transient( 'TRANSIENT_NAME' );
 		delete_option('OPTION_NAME');
 		//info: remove custom file directory for main site
@@ -32,11 +32,11 @@ if ( is_multisite() ) {
 			rmdir($directory);
 		}
 		*/
-	if ( $blogs ) {
+    if ( $blogs ) {
 
-	 	foreach ( $blogs as $blog ) {
-			switch_to_blog( $blog['blog_id'] );
-			/* @TODO: delete all transient, options and files you may have added
+        foreach ( $blogs as $blog ) {
+            switch_to_blog( $blog['blog_id'] );
+            /* @TODO: delete all transient, options and files you may have added
 			delete_transient( 'TRANSIENT_NAME' );
 			delete_option('OPTION_NAME');
 			//info: remove custom file directory for main site
@@ -52,12 +52,12 @@ if ( is_multisite() ) {
 			$GLOBALS['wpdb']->query("DROP TABLE `".$GLOBALS['wpdb']->prefix."TABLE_NAME`");
 			$GLOBALS['wpdb']->query("OPTIMIZE TABLE `" .$GLOBALS['wpdb']->prefix."options`");
 			*/
-			restore_current_blog();
-		}
-	}
+            restore_current_blog();
+        }
+    }
 
 } else {
-	/* @TODO: delete all transient, options and files you may have added
+    /* @TODO: delete all transient, options and files you may have added
 	delete_transient( 'TRANSIENT_NAME' );
 	delete_option('OPTION_NAME');
 	//info: remove custom file directory for main site

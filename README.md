@@ -30,6 +30,8 @@ Super-easy WordPress plugin boilerplate which you can use to develop your own pl
 cd wp-content/plugins
 git clone https://github.com/maxkostinevich/wp-plugin-starter-kit.git your-plugin-name
 cd your-plugin-name
+rm -rf .git
+rm README.md
 npm install --only=dev
 ```
 
@@ -53,6 +55,22 @@ gulp build // build project and create ZIP archive
 ```
 
 ## Changelog
+```
+v2.2.0 - Apr 07, 2016
+** NEW **
+    - Setting field: colorpicker
+    - Setting field: multiple colorpicker
+    - Setting field: HTML
+    - Setting field: Text field with media-uploader button
+    - /.assets/ folder could be used to store plugin sources (psd, svg-fonts, etc)
+    
+** Updates **
+    - Admin class has been splitted
+    - Plugin_Name_Public class has been renamed to Plugin_Name and moved to /includes/ folder
+** Fixes **
+    - AJAX access-level
+    - Prevent files from direct access
+```
 
 ```
 v2.1.0 - Jan 22, 2016
