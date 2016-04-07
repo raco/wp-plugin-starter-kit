@@ -35,6 +35,8 @@ var	mainFiles 	= [
 						'!.git/**',
 						'!node_modules',
 						'!node_modules/**',
+                        '!.assets',
+						'!.assets/**',
 			//			'!bower_components'
 			//			'!bower_components/**'
 				];
