@@ -67,7 +67,7 @@ class Plugin_Name_Admin {
         //add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_css_js' ) );
 
         // Add an action link pointing to the options page.
-        $plugin_basename = plugin_basename( plugin_dir_path( realpath( dirname( __FILE__ ) ) ) . $this->plugin_slug . '.php' );
+        $plugin_basename = plugin_basename( plugin_dir_path( realpath( dirname( dirname( __FILE__ ) ) ) ) . $this->plugin_slug . '.php' );
         add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
 
 
