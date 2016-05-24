@@ -52,9 +52,9 @@ class Plugin_Name_Settings
      * @var      array
      */
     public static $settings_tabs = array(
-        'first_tab'  => 'First Tab',
-        'second_tab' => 'Second Tab',
-        'third_tab'  => 'Third Tab',
+        'plugin_prefix_first_tab'  => 'First Tab',
+        'plugin_prefix_second_tab' => 'Second Tab',
+        'plugin_prefix_third_tab'  => 'Third Tab',
     );
 
     /**
@@ -66,32 +66,32 @@ class Plugin_Name_Settings
      */
     private static $settings_sections = array(
         'section_one'   => array(
-            'tab'         => 'first_tab',
+            'tab'         => 'plugin_prefix_first_tab',
             'title'       => 'Section #1',
             'description' => 'Section #1 Description',
         ),
         'section_two'   => array(
-            'tab'         => 'first_tab',
+            'tab'         => 'plugin_prefix_first_tab',
             'title'       => 'Section #2',
             'description' => 'Section #2 Description',
         ),
         'section_three' => array(
-            'tab'         => 'second_tab',
+            'tab'         => 'plugin_prefix_second_tab',
             'title'       => 'Section #3',
             'description' => 'Section #3 Description',
         ),
         'section_four'  => array(
-            'tab'         => 'second_tab',
+            'tab'         => 'plugin_prefix_second_tab',
             'title'       => 'Section #4',
             'description' => 'Section #4 Description',
         ),
         'section_five'  => array(
-            'tab'         => 'third_tab',
+            'tab'         => 'plugin_prefix_third_tab',
             'title'       => 'Section #5',
             'description' => 'Section #5 Description',
         ),
         'section_six'   => array(
-            'tab'         => 'third_tab',
+            'tab'         => 'plugin_prefix_third_tab',
             'title'       => 'Section #6',
             'description' => 'Section #6 Description',
         ),
