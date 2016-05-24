@@ -8,9 +8,7 @@
  * @link      CONF_Author_Link
  * @copyright CONF_Plugin_Copyright
  */
-?>
 
-<?php
 /**
  *-----------------------------------------
  * Do not delete this line
@@ -25,16 +23,12 @@ defined('ABSPATH') or die("Direct access to the script does not allowed");
 <?php
 
 $entryList = array();
-$sql = 'SELECT * FROM ' . Plugin_Name_DB::get_table_name();
-$entryList = $wpdb->get_results( $sql, 'ARRAY_A' );
+$sql       = 'SELECT * FROM ' . Plugin_Name_DB::get_table_name();
+$entryList = $wpdb->get_results($sql, 'ARRAY_A');
 
-
-if( empty( $entryList ) ){
-    die('It seems that you don\'t have any saved Entries. Please <a href="'.admin_url( 'admin.php?page=' . $this->plugin_slug . '-entry-add' ).'">create a new one</a> and try again');
+if (empty($entryList)) {
+    die('It seems that you don\'t have any saved Entries. Please <a href="' . admin_url('admin.php?page=' . $this->plugin_slug . '-entry-add') . '">create a new one</a> and try again');
 }
-
-
-
 
 ?>
 
@@ -136,11 +130,11 @@ if( empty( $entryList ) ){
                                 <select id="sc_attr_id" name="sc_attr_id">
                                     <option value="">Please select..</option>
                                     <?php
-                                    foreach ($entryList as $entry) {
-                                    ?><option value="<?php echo $entry['id'];?>"><?php echo $entry['title'];?></option>
+foreach ($entryList as $entry) {
+    ?><option value="<?php echo $entry['id']; ?>"><?php echo $entry['title']; ?></option>
                                     <?php
-                                    }
-                                    ?>
+}
+?>
                                 </select>
                             </label>
                         </div>

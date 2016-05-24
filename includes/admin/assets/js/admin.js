@@ -1,10 +1,6 @@
-(function ( $ ) {
+(function($) {
     "use strict";
-
-    $(function () {
-
-
-
+    $(function() {
+        // Some code
     });
-
 }(jQuery));

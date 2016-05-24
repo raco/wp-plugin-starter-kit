@@ -11,9 +11,7 @@
  * @link      CONF_Author_Link
  * @copyright CONF_Plugin_Copyright
  */
-?>
 
-<?php
 /**
  *-----------------------------------------
  * Do not delete this line
@@ -26,7 +24,7 @@ defined('ABSPATH') or die("Direct access to the script does not allowed");
 
 <div class="wrap">
 
-    <h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
+    <h2><?php echo esc_html(get_admin_page_title()); ?></h2>
 
     <!-- @TODO: Provide markup for your options page here. -->
 

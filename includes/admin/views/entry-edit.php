@@ -8,9 +8,7 @@
  * @link      CONF_Author_Link
  * @copyright CONF_Plugin_Copyright
  */
-?>
 
-<?php
 /**
  *-----------------------------------------
  * Do not delete this line
@@ -20,11 +18,10 @@
 defined('ABSPATH') or die("Direct access to the script does not allowed");
 /*-----------------------------------------*/
 
-
-$page_title = 'Add New Entry';
+$page_title            = 'Add New Entry';
 $message_updated_title = 'Entry has been saved!';
-if ( isset( $_GET['id'] ) ) {
-    $page_title = 'Edit Entry';
+if (isset($_GET['id'])) {
+    $page_title            = 'Edit Entry';
     $message_updated_title = 'Entry has been updated!';
 }
 ?>
@@ -34,8 +31,8 @@ if ( isset( $_GET['id'] ) ) {
     <div class="updated"><p><?php _e($message_updated_title, 'plugin-name');?></p></div>
 
     <h2>
-        <a href="<?php echo admin_url( 'admin.php?page=' . $this->plugin_slug . '-entries-view' ) ?>" class="page-title-action">&larr; <?php _e('Back','plugin-name');?></a>
-        <?php _e($page_title, 'plugin-name') ?>
+        <a href="<?php echo admin_url('admin.php?page=' . $this->plugin_slug . '-entries-view') ?>" class="page-title-action">&larr; <?php _e('Back', 'plugin-name');?></a>
+        <?php _e($page_title, 'plugin-name')?>
     </h2>
 
 

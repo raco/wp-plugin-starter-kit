@@ -18,69 +18,68 @@
 defined('ABSPATH') or die("Direct access to the script does not allowed");
 /*-----------------------------------------*/
 
-
 /**
  * Handle Plugin Shortcode Public Side Features
  */
-class Plugin_Name_Shortcode_Public {
+class Plugin_Name_Shortcode_Public
+{
 
     /**
-	 * Instance of this class.
-	 *
-	 * @since    1.0.0
-	 *
-	 * @var      object
-	 */
+     * Instance of this class.
+     *
+     * @since    1.0.0
+     *
+     * @var      object
+     */
     protected static $instance = null;
 
-
-
-
     /**
-	 * Initialize the class
-	 *
-	 * @since     1.0.0
-	 */
-    private function __construct() {
+     * Initialize the class
+     *
+     * @since     1.0.0
+     */
+    private function __construct()
+    {
         /**
          * Call $plugin_slug from public plugin class.
          */
-        $plugin = Plugin_Name::get_instance();
-        $this->plugin_slug = $plugin->get_plugin_slug();
+        $plugin               = Plugin_Name::get_instance();
+        $this->plugin_slug    = $plugin->get_plugin_slug();
         $this->plugin_version = $plugin->get_plugin_version();
     }
 
     /**
-	 * Return an instance of this class.
-	 *
-	 * @since     1.0.0
-	 *
-	 * @return    object    A single instance of this class.
-	 */
-    public static function get_instance() {
+     * Return an instance of this class.
+     *
+     * @since     1.0.0
+     *
+     * @return    object    A single instance of this class.
+     */
+    public static function get_instance()
+    {
 
         // If the single instance hasn't been set, set it now.
-        if ( null == self::$instance ) {
+        if (null == self::$instance) {
             self::$instance = new self;
         }
 
         return self::$instance;
     }
 
-
     /**
-	 * Render Shortcode [plugin_shorcode]
-	 *
-	 * @since     1.0.0
-	 */
-    public function render_sc( $atts, $content = "" ){
+     * Render Shortcode [plugin_shorcode]
+     *
+     * @since     1.0.0
+     */
+    public function render_sc($atts, $content = "")
+    {
         extract(shortcode_atts(array(
-            'id' => ''
+            'id' => '',
         ), $atts));
 
-        $id=(int)$id;
+        $id = (int) $id;
 
-        if( !$id ){
+        if (!$id) {
             return '';
         }
 
@@ -90,9 +89,7 @@ class Plugin_Name_Shortcode_Public {
 
     }
 
-
 }
-
 
 /**
  * Register [plugin_shorcode] shortcode
@@ -102,4 +99,4 @@ class Plugin_Name_Shortcode_Public {
  *
  * @since    1.0.0
  */
-add_shortcode( 'plugin_shorcode', array( Plugin_Name_Shortcode_Public::get_instance(), 'render_sc' ) );
+add_shortcode('plugin_shorcode', array(Plugin_Name_Shortcode_Public::get_instance(), 'render_sc'));
