@@ -56,6 +56,14 @@ gulp build // build project and create ZIP archive
 
 ## Changelog
 ```
+v2.2.1 - May 24, 2016
+** Fixes **
+    - Fix dbDelta() query
+    - Prefix is added to settings tabs
+    - Code formatting changed
+```
+
+```
 v2.2.0 - Apr 07, 2016
 ** NEW **
     - Setting field: colorpicker
