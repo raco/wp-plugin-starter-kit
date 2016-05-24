@@ -142,9 +142,10 @@ class Plugin_Name_DB
             $charset_collate = $wpdb->get_charset_collate();
 
             $sql = "CREATE TABLE $table_name (
-                `id` int(11) not null primary key auto_increment,
-                `title` varchar(255) null,
-                `data` mediumtext null
+                id int(11) not null auto_increment,
+                title varchar(255) null,
+                data mediumtext null,
+                PRIMARY KEY (id)
              ) $charset_collate;";
 
             require_once ABSPATH . 'wp-admin/includes/upgrade.php';
