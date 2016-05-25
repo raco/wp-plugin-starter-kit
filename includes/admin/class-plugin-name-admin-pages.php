@@ -145,7 +145,7 @@ class Plugin_Name_Admin_Pages
          *        For reference: http://codex.wordpress.org/Roles_and_Capabilities
          *
          */
-        $this->plugin_screen_hook_suffix['plugin_name'] = add_object_page(
+        $this->plugin_screen_hook_suffix['plugin_name'] = add_menu_page(
             __('CONF Plugin Name', 'plugin-name'),
             __('CONF Plugin Name', 'plugin-name'),
             'manage_options',
