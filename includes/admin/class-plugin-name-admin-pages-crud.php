@@ -149,7 +149,7 @@ class Plugin_Name_Admin_Pages_CRUD
         /* ----- Plugin Module: CRUD ----- */
         // Example of custom pages (Entries View and Edit)
 
-        $this->plugin_screen_hook_suffix['entries_view'] = add_object_page(
+        $this->plugin_screen_hook_suffix['entries_view'] = add_menu_page(
             __('Manage Entries', 'plugin-name'),
             __('Entries', 'plugin-name'),
             'manage_options',
