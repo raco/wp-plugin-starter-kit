@@ -13,7 +13,8 @@ var pluginConfig = {
     'plugin-name': 'some-awesome-plugin', // Plugin slug
     'Plugin_Name': 'Some_Awesome_Plugin', // Classes prefix
     'plugin_name': 'some_awesome_plugin', // plugin identifier
-    'plugin_prefix': 'sap' // plugin identifier
+    'plugin_prefix': 'sap', // plugin identifier
+	'PLUGIN_NAME': 'PLUGIN_NAME'
 };
 
 var mainFiles = [
