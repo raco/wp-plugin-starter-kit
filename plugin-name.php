@@ -53,6 +53,7 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 function plugin_prefix() {
 	return Plugin_Name::get_instance();
 }
+plugin_prefix();
 
 // Register activation and deactivation hooks
 register_activation_hook( __FILE__, array( 'Plugin_Name', 'activate' ) );
