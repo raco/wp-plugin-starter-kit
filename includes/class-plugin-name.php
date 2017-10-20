@@ -15,11 +15,10 @@
  * Added for security reasons: http://codex.wordpress.org/Theme_Development#Template_Files
  *-----------------------------------------
  */
-defined('ABSPATH') or die("Direct access to the script does not allowed");
+defined( 'ABSPATH' ) or die( "Direct access to the script does not allowed" );
 /*-----------------------------------------*/
 
-class Plugin_Name
-{
+class Plugin_Name {
 
     /**
      * Plugin version name
@@ -67,16 +66,107 @@ class Plugin_Name
      *
      * @since     1.0.0
      */
-    private function __construct()
-    {
+    public function __construct() {
 
-        // Load plugin text domain
-        add_action('init', array($this, 'load_plugin_textdomain'));
+		// Setup constants.
+		$this->setup_constants();
+		
+		// Include plugin files.
+		$this->include_files();
+		
+		// Initialize actions hooks.
+		$this->init_hooks();
+		
+        // Load plugin text domain.
+        add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 
-        // Activate plugin when new blog is added
-        add_action('wpmu_new_blog', array($this, 'activate_new_site'));
+        // Activate plugin when new blog is added.
+        add_action( 'wpmu_new_blog', array( $this, 'activate_new_site' ) );
 
     }
+	
+	/* Setup plugin constants.
+	 *
+	 * @access private
+	 * @since 1.0.0
+	 * @return void
+	 */
+	private function define_constants() {
+		// Plugin version.
+		if ( ! defined( 'PLUGIN_NAME_VERSION' ) ) {
+			define( 'PLUGIN_NAME_VERSION', '1.0.0' );
+		}
+
+		// Plugin Folder Path.
+		if ( ! defined( 'PLUGIN_NAME_PLUGIN_DIR' ) ) {
+			define( 'PLUGIN_NAME_PLUGIN_DIR', dirname( PLUGIN_NAME_PLUGIN_FILE ) . '/' );
+		}
+
+		// Plugin Folder URL.
+		if ( ! defined( 'PLUGIN_NAME_PLUGIN_URL' ) ) {
+			define( 'PLUGIN_NAME_PLUGIN_URL', plugin_dir_url( PLUGIN_NAME_PLUGIN_FILE ) );
+		}		
+		
+		// Plugin Basename
+		if ( ! defined( 'PLUGIN_NAME_PLUGIN_BASENAME' ) ) {
+			define( 'PLUGIN_NAME_PLUGIN_BASENAME', plugin_basename( PLUGIN_NAME_PLUGIN_FILE ) );
+		}
+	}
+	
+	
+	/* Include needed plugin files.
+	 *
+	 * @access public
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function include_files() {
+		require_once PLUGIN_NAME_PLUGIN_DIR . 'includes/class-plugin-name-settings.php';
+		require_once PLUGIN_NAME_PLUGIN_DIR . 'includes/cpt/class-plugin-name-cpt.php';
+		require_once PLUGIN_NAME_PLUGIN_DIR . 'includes/class-plugin-name-recent-entries.php';
+		require_once PLUGIN_NAME_PLUGIN_DIR . 'includes/class-plugin-name-db.php';
+		
+		// Dashboard and Administrative Functionality.
+		if ( is_admin() && ( !defined('DOING_AJAX' ) || !DOING_AJAX ) ) {
+			require_once PLUGIN_NAME_PLUGIN_DIR . 'includes/class-plugin-name-crud-list.php';
+			require_once PLUGIN_NAME_PLUGIN_DIR . 'includes/class-plugin-name-admin.php';
+			require_once PLUGIN_NAME_PLUGIN_DIR . 'includes/class-plugin-name-admin-metaboxes.php';
+			require_once PLUGIN_NAME_PLUGIN_DIR . 'includes/class-plugin-name-admin-pages.php';
+			require_once PLUGIN_NAME_PLUGIN_DIR . 'includes/class-plugin-name-admin-pages-crud.php';
+			require_once PLUGIN_NAME_PLUGIN_DIR . 'includes/class-plugin-name-admin-pages-settings.php';
+		}
+		
+		// Plugin Shortcode.
+		require_once PLUGIN_NAME_PLUGIN_DIR . 'includes/shortcode/class-plugin-name-shortcode-admin.php';
+		require_once PLUGIN_NAME_PLUGIN_DIR . 'includes/shortcode/class-plugin-name-shortcode-public.php';
+		
+		// Handle AJAX Calls.
+		require_once PLUGIN_NAME_PLUGIN_DIR . 'includes/class-plugin-name-ajax.php';
+	}
+	
+	/**
+	 * Init Hooks
+	 */
+	public function init_hooks() {
+		// Plugin settings, custom post type and database.
+		add_action( 'plugins_loaded', array( 'Plugin_Name_Settings', 'get_instance' ) );
+		add_action( 'plugins_loaded', array( 'Plugin_Name_CPT', 'get_instance' ) );
+		add_action( 'plugins_loaded', array( 'Plugin_Name_DB', 'db_check' ) );
+		
+		// Dashboard and Administrative Functionality.
+		if ( is_admin(  ) && ( !defined( 'DOING_AJAX' ) || !DOING_AJAX ) ) {
+			add_action( 'plugins_loaded', array( 'Plugin_Name_Admin', 'get_instance' ) );
+			add_action( 'plugins_loaded', array( 'Plugin_Name_Admin_Metaboxes', 'get_instance' ) );
+			add_action( 'plugins_loaded', array( 'Plugin_Name_Admin_Pages', 'get_instance' ) );
+			add_action( 'plugins_loaded', array( 'Plugin_Name_Admin_Pages_CRUD', 'get_instance' ) );
+			add_action( 'plugins_loaded', array( 'Plugin_Name_Admin_Pages_Settings', 'get_instance' ) );
+		}
+		
+		// Shortcodes and AJAX.
+		add_action( 'plugins_loaded', array( 'Plugin_Name_Shortcode_Admin', 'get_instance' ) );
+		add_action( 'plugins_loaded', array( 'Plugin_Name_Shortcode_Public', 'get_instance' ) );
+		add_action( 'plugins_loaded', array( 'Plugin_Name_AJAX', 'get_instance' ) );
+	}
 
     /**
      * Return the plugin slug.
@@ -85,8 +175,7 @@ class Plugin_Name
      *
      * @return    Plugin slug variable.
      */
-    public function get_plugin_slug()
-    {
+    public function get_plugin_slug() {
         return self::$PLUGIN_SLUG;
     }
 
@@ -97,8 +186,7 @@ class Plugin_Name
      *
      * @return    Plugin version variable.
      */
-    public function get_plugin_version()
-    {
+    public function get_plugin_version() {
         return self::$VERSION;
     }
 
@@ -109,11 +197,10 @@ class Plugin_Name
      *
      * @return    object    A single instance of this class.
      */
-    public static function get_instance()
-    {
+    public static function get_instance() {
 
         // If the single instance hasn't been set, set it now.
-        if (null == self::$instance) {
+        if ( null == self::$instance ) {
             self::$instance = new self;
         }
 
@@ -130,19 +217,18 @@ class Plugin_Name
      *                                       WPMU is disabled or plugin is
      *                                       activated on an individual blog.
      */
-    public static function activate($network_wide)
-    {
+    public static function activate( $network_wide ) {
 
-        if (function_exists('is_multisite') && is_multisite()) {
+        if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 
-            if ($network_wide) {
+            if ( $network_wide ) {
 
                 // Get all blog ids
                 $blog_ids = self::get_blog_ids();
 
-                foreach ($blog_ids as $blog_id) {
+                foreach ( $blog_ids as $blog_id ) {
 
-                    switch_to_blog($blog_id);
+                    switch_to_blog( $blog_id );
                     self::single_activate();
                 }
 
@@ -168,19 +254,18 @@ class Plugin_Name
      *                                       WPMU is disabled or plugin is
      *                                       deactivated on an individual blog.
      */
-    public static function deactivate($network_wide)
-    {
+    public static function deactivate( $network_wide ) {
 
-        if (function_exists('is_multisite') && is_multisite()) {
+        if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 
-            if ($network_wide) {
+            if ( $network_wide ) {
 
                 // Get all blog ids
                 $blog_ids = self::get_blog_ids();
 
-                foreach ($blog_ids as $blog_id) {
+                foreach ( $blog_ids as $blog_id ) {
 
-                    switch_to_blog($blog_id);
+                    switch_to_blog( $blog_id );
                     self::single_deactivate();
 
                 }
@@ -204,14 +289,13 @@ class Plugin_Name
      *
      * @param    int    $blog_id    ID of the new blog.
      */
-    public function activate_new_site($blog_id)
-    {
+    public function activate_new_site( $blog_id ) {
 
-        if (1 !== did_action('wpmu_new_blog')) {
+        if ( 1 !== did_action( 'wpmu_new_blog' ) ) {
             return;
         }
 
-        switch_to_blog($blog_id);
+        switch_to_blog( $blog_id );
         self::single_activate();
         restore_current_blog();
 
@@ -227,8 +311,7 @@ class Plugin_Name
      *
      * @return   array|false    The blog ids, false if no matches.
      */
-    private static function get_blog_ids()
-    {
+    private static function get_blog_ids() {
 
         global $wpdb;
 
@@ -237,7 +320,7 @@ class Plugin_Name
             WHERE archived = '0' AND spam = '0'
             AND deleted = '0'";
 
-        return $wpdb->get_col($sql);
+        return $wpdb->get_col( $sql );
 
     }
 
@@ -246,10 +329,12 @@ class Plugin_Name
      *
      * @since    1.0.0
      */
-    private static function single_activate()
-    {
-        update_option(self::$VERSION_NAME, self::$VERSION);
-
+    private static function single_activate() {
+        update_option( self::$VERSION_NAME, self::$VERSION );
+		
+		register_activation_hook( __FILE__, array( 'Plugin_Name_Settings', 'activate' ) );
+		register_activation_hook( __FILE__, array( 'Plugin_Name_DB', 'activate' ) );
+		
         // @TODO: Define activation functionality here
     }
 
@@ -258,8 +343,7 @@ class Plugin_Name
      *
      * @since    1.0.0
      */
-    private static function single_deactivate()
-    {
+    private static function single_deactivate() {
         // @TODO: Define deactivation functionality here
     }
 
@@ -268,14 +352,13 @@ class Plugin_Name
      *
      * @since    1.0.0
      */
-    public function load_plugin_textdomain()
-    {
+    public function load_plugin_textdomain() {
 
         $domain = self::$PLUGIN_SLUG;
-        $locale = apply_filters('plugin_locale', get_locale(), $domain);
+        $locale = apply_filters( 'plugin_locale', get_locale(), $domain );
 
-        load_textdomain($domain, trailingslashit(WP_LANG_DIR) . $domain . '/' . $domain . '-' . $locale . '.mo');
-        load_plugin_textdomain($domain, false, basename(plugin_dir_path(dirname(__FILE__))) . '/languages/');
+        load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
+        load_plugin_textdomain( $domain, false, basename( plugin_dir_path( dirname( __FILE__ ) ) ) . '/languages/' );
 
     }
 
