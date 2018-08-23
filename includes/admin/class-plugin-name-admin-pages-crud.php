@@ -166,9 +166,8 @@ class Plugin_Name_Admin_Pages_CRUD {
      * @since    1.0.0
      */
 
-    public function display_plugin_page_entries_view()
-    {
-        if ( isset( $_GET['action'] ) && ( $_GET['action'] == 'edit' ) ) {
+    public function display_plugin_page_entries_view() {
+        if ( isset( $_GET['action'] ) && ( $_GET['action'] === 'edit' ) ) {
             $this->display_plugin_page_entry_edit();
         } else {
             $plugin_name_list_table = new Plugin_Name_Admin_CRUD_List();
@@ -184,8 +183,8 @@ class Plugin_Name_Admin_Pages_CRUD {
      * @since    1.0.0
      */
 
-    public function display_plugin_page_entry_edit()
-    {
+    public function display_plugin_page_entry_edit() {
+        /** @var TYPE_NAME $wpdb */
         global $wpdb;
 
         if ( isset( $_GET['id'] ) && $_GET['id'] != 0 ) {
@@ -195,6 +194,7 @@ class Plugin_Name_Admin_Pages_CRUD {
             $entry_title = $entry_data->entry_title;
             // and so on
         }
+        
         include_once 'views/entry-edit.php';
     }
     /* ----- End Module: CRUD ----- */

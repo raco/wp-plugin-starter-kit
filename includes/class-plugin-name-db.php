@@ -9,7 +9,6 @@
  * @copyright CONF_Plugin_Copyright
  */
 
-
 // Exit if accessed directly
 defined( 'ABSPATH' ) || exit;
 
@@ -90,18 +89,18 @@ class Plugin_Name_DB {
      *                                       WPMU is disabled or plugin is
      *                                       activated on an individual blog.
      */
-    public static function activate($network_wide) {
+    public static function activate( $network_wide ) {
 
-        if (function_exists('is_multisite') && is_multisite()) {
+        if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 
-            if ($network_wide) {
+            if ( $network_wide ) {
 
                 // Get all blog ids
                 $blog_ids = self::get_blog_ids();
 
-                foreach ($blog_ids as $blog_id) {
+                foreach ( $blog_ids as $blog_id ) {
 
-                    switch_to_blog($blog_id);
+                    switch_to_blog( $blog_id );
                     self::db_setup();
                 }
 
@@ -123,8 +122,8 @@ class Plugin_Name_DB {
      * @since     1.0.0
      */
     private static function db_setup() {
-        if (get_site_option(self::$db_option_name) != self::$db_version) {
-
+        if ( get_site_option( self::$db_option_name ) !== self::$db_version ) {
+            /** @var TYPE_NAME $wpdb */
             global $wpdb;
 
             $table_name      = self::get_table_name();
@@ -138,9 +137,9 @@ class Plugin_Name_DB {
              ) $charset_collate;";
 
             require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-            dbDelta($sql);
+            dbDelta ($sql );
 
-            update_option(self::$db_option_name, self::$db_version);
+            update_option( self::$db_option_name, self::$db_version );
 
         }
     }
@@ -152,14 +151,23 @@ class Plugin_Name_DB {
      */
     public static function db_check() {
 
-        if (get_site_option(self::$db_option_name) != self::$db_version) {
+        if ( get_site_option( self::$db_option_name ) !== self::$db_version ) {
             self::db_setup();
         }
 
     }
 
+    /**
+     * Get the table name
+     *
+     * @since 1.0.0
+     *
+     * @return string $db_table_name The name of the database table.
+     */
     public static function get_table_name() {
+        /** @var TYPE_NAME $wpdb */
         global $wpdb;
+
         return $wpdb->prefix . self::$db_table_name;
     }
 
