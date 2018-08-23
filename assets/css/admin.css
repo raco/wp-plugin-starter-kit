@@ -1,0 +1,27 @@
+/* This stylesheet is used to style the admin option form of the plugin. */
+
+
+/* ---------------------------------------------------------- */
+
+.section-title-wrapper {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 8px 12px;
+    margin: 0;
+    line-height: 1.4;
+    border-bottom: 1px solid #eee;
+}
+
+label {
+    display: block;
+}
+
+fieldset {
+    padding: 4px 9px 7px 9px;
+    border: 1px solid #eee;
+    margin-bottom: 10px;
+}
+
+fieldset:last-child {
+    margin-bottom: 0px;
+}

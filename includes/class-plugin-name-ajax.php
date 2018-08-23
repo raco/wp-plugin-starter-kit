@@ -9,20 +9,14 @@
  * @copyright CONF_Plugin_Copyright
  */
 
-/**
- *-----------------------------------------
- * Do not delete this line
- * Added for security reasons: http://codex.wordpress.org/Theme_Development#Template_Files
- *-----------------------------------------
- */
-defined('ABSPATH') or die("Direct access to the script does not allowed");
-/*-----------------------------------------*/
+// Exit if accessed directly
+defined( 'ABSPATH' ) || exit;
+
 
 /**
  * Handle AJAX calls
  */
-class Plugin_Name_AJAX
-{
+class Plugin_Name_AJAX {
 
     /**
      * Instance of this class.
@@ -38,8 +32,7 @@ class Plugin_Name_AJAX
      *
      * @since     1.0.0
      */
-    private function __construct()
-    {
+    private function __construct() {
 
         // Backend AJAX calls
         if (current_user_can('manage_options')) {
@@ -59,8 +52,7 @@ class Plugin_Name_AJAX
      *
      * @return    object    A single instance of this class.
      */
-    public static function get_instance()
-    {
+    public static function get_instance() {
 
         // If the single instance hasn't been set, set it now.
         if (null == self::$instance) {
@@ -75,8 +67,7 @@ class Plugin_Name_AJAX
      *
      * @since    1.0.0
      */
-    public function ajax_backend_call()
-    {
+    public function ajax_backend_call() {
 
         // Security check
         check_ajax_referer('referer_id', 'nonce');
@@ -95,8 +86,7 @@ class Plugin_Name_AJAX
      *
      * @since    1.0.0
      */
-    public function ajax_frontend_call()
-    {
+    public function ajax_frontend_call() {
 
         // Security check
         check_ajax_referer('referer_id', 'nonce');

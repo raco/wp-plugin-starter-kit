@@ -57,4 +57,7 @@ plugin_prefix();
 
 // Register activation and deactivation hooks
 register_activation_hook( __FILE__, array( 'Plugin_Name', 'activate' ) );
+register_activation_hook( __FILE__, array( 'Plugin_Name_Settings', 'activate' ) );
+register_activation_hook( __FILE__, array( 'Plugin_Name_DB', 'activate' ) );
+
 register_deactivation_hook( __FILE__, array(  'Plugin_Name', 'deactivate' ) );

@@ -18,7 +18,7 @@
  * Added for security reasons: http://codex.wordpress.org/Theme_Development#Template_Files
  *-----------------------------------------
  */
-defined('ABSPATH') or die("Direct access to the script does not allowed");
+defined( 'ABSPATH' ) or die( "Direct access to the script does not allowed" );
 /*-----------------------------------------*/
 ?>
 
@@ -28,11 +28,11 @@ $settings_tabs = Plugin_Name_Settings::$settings_tabs;
 
 <div class="wrap">
 
-    <h2><?php echo esc_html(get_admin_page_title()); ?></h2>
+    <h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
 
     <h2 class="nav-tab-wrapper">
-        <?php foreach ($settings_tabs as $tab_id => $tab) {?>
-        <a href="#<?php echo $tab_id; ?>" class="nav-tab"><?php _e($tab, 'plugin-name');?></a>
+        <?php foreach ( $settings_tabs as $tab_id => $tab ) {?>
+        <a href="#<?php echo $tab_id; ?>" class="nav-tab"><?php _e( $tab, 'plugin-name' );?></a>
         <?php }?>
     </h2>
 
@@ -49,10 +49,10 @@ $settings_tabs = Plugin_Name_Settings::$settings_tabs;
 
                             <form id="plugin-settings-form" action="options.php" method="POST">
                                 <?php
-settings_fields(Plugin_Name_Settings::$settings_group_id);
-foreach ($settings_tabs as $tab_id => $tab) {
+settings_fields( Plugin_Name_Settings::$settings_group_id );
+foreach ( $settings_tabs as $tab_id => $tab ) {
     echo '<div class="table ui-tabs-hide" id="' . $tab_id . '">';
-    do_settings_sections($tab_id);
+    do_settings_sections( $tab_id );
     echo '</div>';
 }
 submit_button();

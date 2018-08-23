@@ -9,20 +9,14 @@
  * @copyright CONF_Plugin_Copyright
  */
 
-/**
- *-----------------------------------------
- * Do not delete this line
- * Added for security reasons: http://codex.wordpress.org/Theme_Development#Template_Files
- *-----------------------------------------
- */
-defined('ABSPATH') or die("Direct access to the script does not allowed");
-/*-----------------------------------------*/
+
+// Exit if accessed directly
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Setup custom DB tables
  */
-class Plugin_Name_DB
-{
+class Plugin_Name_DB {
 
     /**
      * Instance of this class.
@@ -61,14 +55,12 @@ class Plugin_Name_DB
     private static $db_version = '1.0';
 
     /**
-     * Initialize the plugin by setting localization and loading public scripts
+     * Initialize the plugin
      * and styles.
      *
      * @since     1.0.0
      */
-    private function __construct()
-    {
-
+    private function __construct() {
     }
 
     /**
@@ -78,10 +70,9 @@ class Plugin_Name_DB
      *
      * @return    object    A single instance of this class.
      */
-    public static function get_instance()
-    {
+    public static function get_instance() {
 
-        // If the single instance hasn't been set, set it now.
+	    // If the single instance hasn't been set, set it now.
         if (null == self::$instance) {
             self::$instance = new self;
         }
@@ -99,8 +90,7 @@ class Plugin_Name_DB
      *                                       WPMU is disabled or plugin is
      *                                       activated on an individual blog.
      */
-    public static function activate($network_wide)
-    {
+    public static function activate($network_wide) {
 
         if (function_exists('is_multisite') && is_multisite()) {
 
@@ -132,8 +122,7 @@ class Plugin_Name_DB
      *
      * @since     1.0.0
      */
-    private static function db_setup()
-    {
+    private static function db_setup() {
         if (get_site_option(self::$db_option_name) != self::$db_version) {
 
             global $wpdb;
@@ -161,8 +150,7 @@ class Plugin_Name_DB
      *
      * @since     1.0.0
      */
-    public static function db_check()
-    {
+    public static function db_check() {
 
         if (get_site_option(self::$db_option_name) != self::$db_version) {
             self::db_setup();
@@ -170,8 +158,7 @@ class Plugin_Name_DB
 
     }
 
-    public static function get_table_name()
-    {
+    public static function get_table_name() {
         global $wpdb;
         return $wpdb->prefix . self::$db_table_name;
     }

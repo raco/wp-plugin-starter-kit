@@ -9,17 +9,10 @@
  * @copyright CONF_Plugin_Copyright
  */
 
-/**
- *-----------------------------------------
- * Do not delete this line
- * Added for security reasons: http://codex.wordpress.org/Theme_Development#Template_Files
- *-----------------------------------------
- */
-defined('ABSPATH') or die("Direct access to the script does not allowed");
-/*-----------------------------------------*/
+ // Exit if accessed directly
+ defined( 'ABSPATH' ) || exit;
 
-class Plugin_Name_Admin_Pages
-{
+class Plugin_Name_Admin_Pages {
 
     /**
      * Instance of this class.
@@ -45,15 +38,14 @@ class Plugin_Name_Admin_Pages
      *
      * @since     1.0.0
      */
-    private function __construct()
-    {
+    private function __construct() {
 
         /*
          * @TODO :
          *
          * - Uncomment following lines if the admin class should only be available for super admins
          */
-        /* if( ! is_super_admin() ) {
+        /* if(  ! is_super_admin()  ) {
         return;
         } */
 
@@ -65,10 +57,10 @@ class Plugin_Name_Admin_Pages
         $this->plugin_version = $plugin->get_plugin_version();
 
         // Load admin style sheet and JavaScript.
-        add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_css_js'));
+        add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_css_js' ) );
 
         // Add the plugin admin pages and menu items.
-        add_action('admin_menu', array($this, 'add_plugin_admin_menu'));
+        add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
 
     }
 
@@ -79,20 +71,19 @@ class Plugin_Name_Admin_Pages
      *
      * @return    object    A single instance of this class.
      */
-    public static function get_instance()
-    {
+    public static function get_instance() {
 
         /*
          * @TODO :
          *
          * - Uncomment following lines if the admin class should only be available for super admins
          */
-        /* if( ! is_super_admin() ) {
+        /* if(  ! is_super_admin()  ) {
         return;
         } */
 
         // If the single instance hasn't been set, set it now.
-        if (null == self::$instance) {
+        if ( null == self::$instance ) {
             self::$instance = new self;
         }
 
@@ -106,23 +97,22 @@ class Plugin_Name_Admin_Pages
      *
      * @return    null    Return early if no settings page is registered.
      */
-    public function enqueue_admin_css_js()
-    {
+    public function enqueue_admin_css_js() {
 
-        if (!isset($this->plugin_screen_hook_suffix)) {
+        if ( ! isset( $this->plugin_screen_hook_suffix ) ) {
             return;
         }
 
         $screen = get_current_screen();
 
         // Main Plugin Page
-        if ($this->plugin_screen_hook_suffix['plugin_name'] == $screen->id) {
+        if ( $this->plugin_screen_hook_suffix['plugin_name'] === $screen->id ) {
             /* Admin Styles */
-            wp_enqueue_style($this->plugin_slug . '-admin-styles', plugins_url('assets/css/admin.css', __FILE__), array(), $this->plugin_version);
+            wp_enqueue_style( $this->plugin_slug . '-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array(), $this->plugin_version );
 
             // Main Admin JS Script
-            wp_register_script($this->plugin_slug . '-admin-script', plugins_url('assets/js/admin.js', __FILE__), array('jquery', $this->plugin_slug . '-admin-app'), $this->plugin_version);
-            wp_enqueue_script($this->plugin_slug . '-admin-script');
+            wp_register_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery' ), $this->plugin_version );
+            wp_enqueue_script( $this->plugin_slug . '-admin-script' );
 
         }
 
@@ -133,8 +123,7 @@ class Plugin_Name_Admin_Pages
      *
      * @since    1.0.0
      */
-    public function add_plugin_admin_menu()
-    {
+    public function add_plugin_admin_menu() {
 
         /*
          * Add a settings page for this plugin to the Settings menu.
@@ -145,14 +134,14 @@ class Plugin_Name_Admin_Pages
          *        For reference: http://codex.wordpress.org/Roles_and_Capabilities
          *
          */
-        $this->plugin_screen_hook_suffix['plugin_name'] = add_object_page(
-            __('CONF Plugin Name', 'plugin-name'),
-            __('CONF Plugin Name', 'plugin-name'),
+        $this->plugin_screen_hook_suffix['plugin_name'] = add_menu_page(
+            __( 'CONF Plugin Name', 'plugin-name' ),
+            __( 'CONF Plugin Name', 'plugin-name' ),
             'manage_options',
             $this->plugin_slug . '-main-page',
-            array($this, 'display_plugin_page_main'),
+            array( $this, 'display_plugin_page_main' ),
             'dashicons-layout'
-        );
+         );
 
     }
 
@@ -161,8 +150,7 @@ class Plugin_Name_Admin_Pages
      *
      * @since    1.0.0
      */
-    public function display_plugin_page_main()
-    {
+    public function display_plugin_page_main() {
         include_once 'views/main.php';
     }
 

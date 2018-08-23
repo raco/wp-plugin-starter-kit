@@ -9,16 +9,12 @@
  * @copyright CONF_Plugin_Copyright
  */
 
-/**
- *-----------------------------------------
- * Do not delete this line
- * Added for security reasons: http://codex.wordpress.org/Theme_Development#Template_Files
- *-----------------------------------------
- */
-defined( 'ABSPATH' ) or die( "Direct access to the script does not allowed" );
-/*-----------------------------------------*/
+//namespace Plugin_Name;
+ 
+// Exit if accessed directly
+defined( 'ABSPATH' ) || exit;
 
-class Plugin_Name {
+final class Plugin_Name {
 
     /**
      * Plugin version name
@@ -91,7 +87,7 @@ class Plugin_Name {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	private function define_constants() {
+	private function setup_constants() {
 		// Plugin version.
 		if ( ! defined( 'PLUGIN_NAME_VERSION' ) ) {
 			define( 'PLUGIN_NAME_VERSION', '1.0.0' );
@@ -128,12 +124,12 @@ class Plugin_Name {
 		
 		// Dashboard and Administrative Functionality.
 		if ( is_admin() && ( !defined('DOING_AJAX' ) || !DOING_AJAX ) ) {
-			require_once PLUGIN_NAME_PLUGIN_DIR . 'includes/class-plugin-name-crud-list.php';
-			require_once PLUGIN_NAME_PLUGIN_DIR . 'includes/class-plugin-name-admin.php';
-			require_once PLUGIN_NAME_PLUGIN_DIR . 'includes/class-plugin-name-admin-metaboxes.php';
-			require_once PLUGIN_NAME_PLUGIN_DIR . 'includes/class-plugin-name-admin-pages.php';
-			require_once PLUGIN_NAME_PLUGIN_DIR . 'includes/class-plugin-name-admin-pages-crud.php';
-			require_once PLUGIN_NAME_PLUGIN_DIR . 'includes/class-plugin-name-admin-pages-settings.php';
+			require_once PLUGIN_NAME_PLUGIN_DIR . 'includes/admin/class-plugin-name-admin-crud-list.php';
+			require_once PLUGIN_NAME_PLUGIN_DIR . 'includes/admin/class-plugin-name-admin.php';
+			require_once PLUGIN_NAME_PLUGIN_DIR . 'includes/admin/class-plugin-name-admin-metaboxes.php';
+			require_once PLUGIN_NAME_PLUGIN_DIR . 'includes/admin/class-plugin-name-admin-pages.php';
+			require_once PLUGIN_NAME_PLUGIN_DIR . 'includes/admin/class-plugin-name-admin-pages-crud.php';
+			require_once PLUGIN_NAME_PLUGIN_DIR . 'includes/admin/class-plugin-name-admin-pages-settings.php';
 		}
 		
 		// Plugin Shortcode.
@@ -331,9 +327,6 @@ class Plugin_Name {
      */
     private static function single_activate() {
         update_option( self::$VERSION_NAME, self::$VERSION );
-		
-		register_activation_hook( __FILE__, array( 'Plugin_Name_Settings', 'activate' ) );
-		register_activation_hook( __FILE__, array( 'Plugin_Name_DB', 'activate' ) );
 		
         // @TODO: Define activation functionality here
     }
