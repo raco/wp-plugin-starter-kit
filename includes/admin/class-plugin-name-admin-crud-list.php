@@ -17,7 +17,7 @@ defined( 'ABSPATH' ) || exit;
  * Create custom admin pages for custom DB Tables using WP_List_Table class
  */
 
-if (!class_exists('WP_List_Table')) {
+if ( !class_exists('WP_List_Table' ) ) {
 	require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
 }
 
@@ -240,7 +240,7 @@ class Plugin_Name_Admin_CRUD_List extends WP_List_Table {
 		if ( ! current_user_can('manage_options' ) ) {
 			return;
 		}
-		
+
 		//Detect when a bulk action is being triggered.
 		if ( 'delete' === $this->current_action() ) {
 
@@ -262,7 +262,7 @@ class Plugin_Name_Admin_CRUD_List extends WP_List_Table {
 			foreach ( $delete_ids as $id ) {
 				self::delete_entry( $id );
 			}
-			
+
 			echo '<div class="updated"><p><?php esc_html__( "Entries has been deleted", "plugin-name" ); ?></p></div>';
 			//    wp_redirect( esc_url( add_query_arg() ) );
 			//    exit;
